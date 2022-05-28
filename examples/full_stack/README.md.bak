@@ -29,11 +29,6 @@ $ poetry install
 $ export BLOCKFROST_ID="your_blockfrost_project_id"
 $ export FLASK_APP=server
 $ poetry run flask run
-
-$ export BLOCKFROST_ID="testnetLwk1T6SbdoH2uaeEB1HgN7QsIvcFGZCU"
-$ export FLASK_APP=server
-$ poetry run flask run
-
 ```
 
 4. Open a browser that has Nami wallet extension installed, go to 

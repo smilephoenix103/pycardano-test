@@ -42,7 +42,24 @@ class RecipientForm extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+
+    this.state = {
+      percent: '',
+      utox:''
+    };
+    this.utoxHandleChange = this.utoxHandleChange.bind(this);
+    this.percentHandleChange = this.percentHandleChange.bind(this);
   }
+
+  percentHandleChange(event) {
+    let real = this.state.utox * event.target.value / 100;
+    this.setState({percent: real});
+  }
+
+  utoxHandleChange(event) {
+    this.setState({utox: event.target.value});
+  }
+
   componentDidMount() {
     this.refs.address.focus();
     this.refs.amount.focus();
@@ -58,12 +75,33 @@ class RecipientForm extends React.Component {
       this.refs.form.reset();
     }
   }
+  // given address, fee address fee percentage, utxos format the tx
   render () {
     return (
-      <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-        <input type="text" ref="address" className="form-control" placeholder="add a testnet address..."/>
-        <input type="text" ref="amount" className="form-control" placeholder="amount in ada"/>
-        <button type="submit" className="btn btn-default">Add</button>
+      <form ref="form" onSubmit={this.onSubmit}>
+        <div className="row">
+          <div className="col-sm-8">
+            <label>Given Address</label>
+            <input type="text" ref="address" className="form-control" placeholder="add a testnet given address..."/>
+          </div>
+          <div className="col-sm-4">
+            <label>Utxos Format</label>
+            <input type="text" ref="amount" className="form-control" placeholder="input utox" onChange={this.utoxHandleChange}/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-8">
+            <label>Fee Address</label>
+            <input type="text" ref="address" className="form-control" placeholder="add fee address"/>
+          </div>
+          <div className="col-sm-4">
+            <label>Fee Percentage(%)</label>
+            <input type="text" ref="percentage" className="form-control" placeholder="input fee percentage" onChange={this.percentHandleChange}/>
+            <input type="text" ref="amount" className="form-control hidden" placeholder="input fee percentage " defaultValue={this.state.percent}/>
+          </div>
+        </div>
+
+        <button type="submit" className="btn btn-default hidden">Add</button>
       </form>
     );
   }
@@ -71,7 +109,7 @@ class RecipientForm extends React.Component {
 
 class RecipientHeader extends React.Component {
   render () {
-    return <h1>Recipient list</h1>;
+    return <h1>Pycardano Test</h1>;
   }
 }
 
